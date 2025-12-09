@@ -57,16 +57,18 @@ with st.sidebar:
         st.markdown("DragNTrain")
 
     st.markdown("<h2 class='sidebar-title'>DragNTrain</h2>", unsafe_allow_html=True)
-    st.markdown("Your Visual Machine Learning Playground")
+    st.markdown("### Your No-Code Machine Learning Studio")
+    st.caption("Build, train & evaluate ML models visually — zero coding required.")
 
     step_labels = {
-        1: "1 Upload Data",
-        2: "2 Preprocess",
-        3: "3 Train–Test Split",
-        4: "4 Model & Results",
+        1: "📂 Upload Dataset",
+        2: "🧹 Preprocess Data",
+        3: "✂️ Train–Test Split",
+        4: "🤖 Train & Evaluate Model",
     }
 
     if st.session_state.step > 0:
+        st.markdown("### 🔁 Workflow Progress")
         for i in range(1, 5):
             if st.session_state.step > i:
                 css_class = "step-completed"
@@ -74,17 +76,20 @@ with st.sidebar:
                 css_class = "step-active"
             else:
                 css_class = "step-pending"
+
             st.markdown(
                 f"<div class='{css_class}'>{step_labels[i]}</div>",
                 unsafe_allow_html=True,
             )
 
         st.markdown("---")
-        if st.button("Reset Pipeline"):
+
+        if st.button("🔄 Reset Entire Pipeline"):
             reset_pipeline()
 
+    st.markdown("---")
     st.markdown(
-        "<p class='sidebar-footer'>DragNTrain • No-Code Machine Learning Platform</p>",
+        "<p class='sidebar-footer'>© 2025 • DragNTrain AI • Built for Learning & Rapid ML Prototyping</p>",
         unsafe_allow_html=True,
     )
 
@@ -95,44 +100,89 @@ if st.session_state.step == 0:
         <div class='header'>
             <div>
                 <h1>🧠 DragNTrain</h1>
-                <p><b>Your Visual Machine Learning Playground</b></p>
-                <p>Build, preprocess, train and evaluate ML models without writing a single line of code.</p>
+                <h3>No-Code Machine Learning Platform</h3>
+                <p>
+                Build, train, evaluate and compare machine learning models using a fully visual workflow.
+                No coding. No setup. Just upload your dataset and start experimenting.
+                </p>
             </div>
         </div>
         """,
         unsafe_allow_html=True,
     )
 
+    st.markdown("---")
+
+    st.markdown("## 🚀 Why DragNTrain Exists")
+    st.write("""
+    Machine learning is powerful, but traditional workflows are complex and intimidating.
+    DragNTrain removes this barrier by transforming the entire ML lifecycle into a simple,
+    guided, and visual experience. Whether you're a student, beginner, or working professional,
+    you can now build real ML models confidently.
+    """)
+
+    st.markdown("---")
+
+    st.markdown("## 🛠 What You Can Do")
+    st.write("""
+    • Upload real-world datasets (CSV / Excel)  
+    • Automatically clean and preprocess features  
+    • Select the target variable visually  
+    • Split data into training and testing sets  
+    • Train ML models in one click  
+    • View accuracy, confusion matrix & feature importance  
+    • Compare multiple trained models  
+    • Download prediction results instantly  
+    """)
+
+    st.markdown("---")
+
+    st.markdown("## 🎯 Who Should Use This?")
+    st.write("""
+    ✅ Students building academic projects  
+    ✅ Beginners learning machine learning concepts  
+    ✅ Data analysts validating ideas quickly  
+    ✅ Developers testing datasets visually  
+    """)
+
+    st.markdown("---")
+
+    st.markdown("## ⚙️ How DragNTrain Works")
+    st.write("""
+    The workflow is divided into four simple steps:
+    
+    1️⃣ Upload your dataset  
+    2️⃣ Preprocess & select the target  
+    3️⃣ Perform train–test split  
+    4️⃣ Train and evaluate your ML model  
+
+    Each step is clearly tracked so you always know where you are in the pipeline.
+    """)
+
+    st.markdown("---")
+
+    st.markdown("## 🔐 Privacy & Security")
+    st.write("""
+    Your data is processed only during your active session.
+    No permanent storage, no tracking, and no external data usage.
+    """)
+
+    st.markdown("---")
+
     c1, c2, c3 = st.columns(3)
 
     with c1:
-        st.metric("No-Code ML", "Visual")
+        st.metric("Visual ML", "100%")
 
     with c2:
-        st.metric("Auto Preprocessing", "Enabled")
+        st.metric("Auto Processing", "Enabled")
 
     with c3:
-        st.metric("Model Training", "1-Click")
+        st.metric("One-Click Training", "Live")
 
     st.markdown("---")
 
-    st.markdown("What You Can Do")
-    st.write(
-        """
-        - Upload any real-world dataset  
-        - Automatically clean, encode and scale features  
-        - Split data into training and testing sets  
-        - Train classification models  
-        - Visualize accuracy and confusion matrix  
-        - View feature importance  
-        - Compare multiple trained models  
-        - Download processed data and predictions  
-        """
-    )
-
-    st.markdown("---")
-
-    if st.button("Start Building"):
+    if st.button("🚀 Start Building Your ML Model"):
         st.session_state.step = 1
         st.rerun()
 
@@ -159,7 +209,7 @@ st.markdown("---")
 
 
 def step_upload_data():
-    st.subheader("Step 1 · Upload Dataset")
+    st.subheader("Step 1 · Upload Your Dataset")
 
     col1, col2 = st.columns([2, 1])
 
@@ -200,13 +250,13 @@ def step_upload_data():
         )
 
     if st.session_state.df is not None:
-        if st.button("Next: Preprocess Data", use_container_width=True):
+        if st.button("✅ Continue to Data Cleaning", use_container_width=True):
             st.session_state.step = 2
             st.rerun()
 
 
 def step_preprocess():
-    st.subheader("Step 2 · Preprocess & Select Target")
+    st.subheader("Step 2 · Clean & Prepare Your Data")
 
     if st.session_state.df is None:
         st.warning("Please upload a dataset first in Step 1.")
@@ -282,13 +332,13 @@ def step_preprocess():
         )
 
     if st.session_state.processed_df is not None:
-        if st.button("Next: Train–Test Split", use_container_width=True):
+        if st.button("✂️ Split Dataset", use_container_width=True):
             st.session_state.step = 3
             st.rerun()
 
 
 def step_split():
-    st.subheader("Step 3 · Train–Test Split")
+    st.subheader("Step 3 · Split for Training & Testing")
 
     if st.session_state.processed_df is None or st.session_state.target_col is None:
         st.warning("Please complete preprocessing and target selection in Step 2.")
@@ -336,13 +386,13 @@ def step_split():
         )
 
     if st.session_state.split_data is not None:
-        if st.button("Next: Train Model & View Results", use_container_width=True):
+        if st.button("🤖 Train ML Model", use_container_width=True):
             st.session_state.step = 4
             st.rerun()
 
 
 def step_model():
-    st.subheader("Step 4 · Model Selection & Results")
+    st.subheader("Step 4 · Train, Evaluate & Compare Models")
 
     if st.session_state.split_data is None:
         st.warning("Please perform train–test split in Step 3.")
@@ -485,13 +535,13 @@ def step_model():
         csv_preds = pred_df.to_csv(index=False).encode("utf-8")
 
         st.download_button(
-            label="Download Predictions (CSV)",
+            label="⬇️ Download Model Predictions",
             data=csv_preds,
             file_name="model_predictions.csv",
             mime="text/csv",
         )
 
-        st.success("You have completed the full MLipeline without writing code")
+        st.success("You have completed the full ML pipeline without writing code")
 
 
 if st.session_state.step == 1:
@@ -502,3 +552,9 @@ elif st.session_state.step == 3:
     step_split()
 elif st.session_state.step == 4:
     step_model()
+
+st.markdown("---")
+st.markdown(
+    "<center>🚀 DragNTrain • No-Code Machine Learning Platform • Built for Education & Rapid Prototyping</center>",
+    unsafe_allow_html=True,
+)

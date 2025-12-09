@@ -1,37 +1,40 @@
-# 🧠 DragNTrain – No-Code Machine Learning Platform  
+# 🧠 DragNTrain — No-Code Machine Learning Platform
 
-DragNTrain is a **visual, no-code machine learning web application** built using **Streamlit**.  
-It allows users to **upload datasets, preprocess data, train models, evaluate results, and download predictions** — all without writing a single line of ML code.
-
----
-
-## 🚀 Features
-
-- ✅ Upload CSV or Excel datasets  
-- ✅ Automatic data preprocessing  
-- ✅ Target column selection  
-- ✅ Train–test split  
-- ✅ Train ML models (Logistic Regression & Decision Tree)  
-- ✅ Accuracy visualization  
-- ✅ Confusion matrix visualization  
-- ✅ Classification report (table view)  
-- ✅ Summary metrics (Accuracy, Macro Avg, Weighted Avg)  
-- ✅ Feature importance visualization  
-- ✅ Model comparison dashboard  
-- ✅ Download predictions as CSV  
-- ✅ Clean UI with sidebar pipeline tracking  
+DragNTrain is an interactive no-code machine learning platform that allows users to build, train, and evaluate machine learning models through a simple visual workflow. It removes the complexity of writing ML code and makes the entire process accessible to students, beginners, and non-technical users. With DragNTrain, users can upload real-world datasets, automatically clean and preprocess data, select target variables, apply feature scaling, split datasets into training and testing sets, train multiple classification models, compare their performance, visualize accuracy, confusion matrices, and feature importance.
 
 ---
 
-## 🛠️ Tech Stack
+## 🧩 Machine Learning Workflow
 
-- **Frontend & Backend:** Streamlit  
-- **ML Models:** Scikit-Learn  
-- **Data Handling:** Pandas, NumPy  
-- **Visualization:** Matplotlib  
-- **Styling:** Custom CSS  
+DragNTrain follows a structured **4-step ML pipeline**:
 
----
+### 1️⃣ Upload Dataset
+- Upload CSV or Excel files
+- View dataset preview
+- View total rows & columns
 
-## 📂 Project Structure
+### 2️⃣ Clean & Preprocess
+- Select target (label) column
+- Handle missing values automatically
+- Encode categorical data
+- Apply:
+  - **Standardization (StandardScaler)**
+  - **Normalization (MinMaxScaler)**
 
+### 3️⃣ Train–Test Split
+- Adjustable train size slider
+- Automatically splits data into:
+  - Training set
+  - Testing set
+
+### 4️⃣ Model Training & Evaluation
+- Supported models:
+  - Logistic Regression
+  - Decision Tree Classifier
+- Evaluation metrics:
+  - Accuracy
+  - Confusion Matrix
+  - Classification Report
+  - Feature Importance
+- Compare multiple models
+- Download predictions as CSV
