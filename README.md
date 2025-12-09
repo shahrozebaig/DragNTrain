@@ -38,3 +38,10 @@ DragNTrain follows a structured **4-step ML pipeline**:
   - Feature Importance
 - Compare multiple models
 - Download predictions as CSV
+
+
+<img width="1670" height="1231" alt="Screenshot 2025-12-10 004705" src="https://github.com/user-attachments/assets/7faf5c01-b550-4672-84ab-c0b15ac164ef" />
+
+
+<img width="1873" height="943" alt="Screenshot 2025-12-10 004950" src="https://github.com/user-attachments/assets/2e1323bf-25c1-47a8-913d-782e63636265" />
+
