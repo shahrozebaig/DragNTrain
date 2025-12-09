@@ -10,16 +10,12 @@ from utils.visualization import (
     plot_feature_importance,
 )
 
-from reportlab.lib.pagesizes import letter
-from reportlab.platypus import SimpleDocTemplate, Table
-from io import BytesIO
-
-
 st.set_page_config(
     page_title="DragNTrain",
     page_icon="🧠",
     layout="wide",
 )
+
 
 def load_custom_css():
     try:
@@ -28,12 +24,15 @@ def load_custom_css():
     except FileNotFoundError:
         pass
 
+
 load_custom_css()
+
 
 def reset_pipeline():
     for key in list(st.session_state.keys()):
         del st.session_state[key]
     st.rerun()
+
 
 if "df" not in st.session_state:
     st.session_state.df = None
@@ -421,16 +420,6 @@ def step_model():
                     parts = line.split()
                     if len(parts) == 5:
                         rows.append(parts)
-                    elif len(parts) == 4 and parts[0] == "accuracy":
-                        rows.append(["accuracy", "-", "-", parts[1], parts[3]])
-                    elif len(parts) == 6 and parts[0] in ["macro", "weighted"]:
-                        rows.append([
-                            parts[0] + " " + parts[1],
-                            parts[2],
-                            parts[3],
-                            parts[4],
-                            parts[5],
-                        ])
 
                 report_df = pd.DataFrame(
                     rows,
@@ -438,6 +427,36 @@ def step_model():
                 )
                 st.dataframe(report_df, width="stretch")
 
+        summary_rows = [[
+            "Accuracy",
+            "-",
+            "-",
+            f"{model_info['accuracy']:.2f}",
+            "-"
+        ]]
+
+        macro_avg = None
+        weighted_avg = None
+
+        for line in model_info["report"].split("\n"):
+            parts = line.split()
+            if len(parts) == 6 and parts[0] == "macro":
+                macro_avg = ["Macro Avg", parts[2], parts[3], parts[4], parts[5]]
+            if len(parts) == 6 and parts[0] == "weighted":
+                weighted_avg = ["Weighted Avg", parts[2], parts[3], parts[4], parts[5]]
+
+        if macro_avg:
+            summary_rows.append(macro_avg)
+        if weighted_avg:
+            summary_rows.append(weighted_avg)
+
+        summary_df = pd.DataFrame(
+            summary_rows,
+            columns=["Type", "Precision", "Recall", "F1-Score", "Support"],
+        )
+
+        st.markdown("### Summary Metrics (Improved Table)")
+        st.dataframe(summary_df, width="stretch")
         st.markdown("Confusion Matrix")
         fig_cm = plot_confusion_matrix_figure(
             model_info["cm"], model_info["class_names"]
@@ -463,20 +482,16 @@ def step_model():
             X_test.fillna(X_test.mean())
         )
 
-        buffer = BytesIO()
-        pdf = SimpleDocTemplate(buffer, pagesize=letter)
-        table_data = [pred_df.columns.tolist()] + pred_df.values.tolist()
-        table = Table(table_data)
-        pdf.build([table])
+        csv_preds = pred_df.to_csv(index=False).encode("utf-8")
 
         st.download_button(
-            label="Download Predictions (PDF)",
-            data=buffer.getvalue(),
-            file_name="model_predictions.pdf",
-            mime="application/pdf",
+            label="Download Predictions (CSV)",
+            data=csv_preds,
+            file_name="model_predictions.csv",
+            mime="text/csv",
         )
 
-        st.success("You have completed the full ML pipeline without writing code")
+        st.success("You have completed the full MLipeline without writing code")
 
 
 if st.session_state.step == 1:
