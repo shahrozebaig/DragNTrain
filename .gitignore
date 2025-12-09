@@ -1,0 +1,75 @@
+# -------------------------
+# Python Cache & Bytecode
+# -------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+
+# -------------------------
+# Virtual Environments
+# -------------------------
+venv/
+env/
+.venv/
+ENV/
+
+# -------------------------
+# Jupyter & IPython
+# -------------------------
+.ipynb_checkpoints/
+
+# -------------------------
+# VS Code / IDE
+# -------------------------
+.vscode/
+.idea/
+*.swp
+
+# -------------------------
+# Streamlit Secrets
+# -------------------------
+.streamlit/secrets.toml
+
+# -------------------------
+# Data Files (Keep Raw Data Clean)
+# -------------------------
+*.csv
+*.xlsx
+*.xls
+
+# ✅ Allow sample datasets if needed:
+!sample_data.csv
+!example.xlsx
+
+# -------------------------
+# Model Files
+# -------------------------
+*.pkl
+*.joblib
+*.sav
+
+# -------------------------
+# Logs & Temp Files
+# -------------------------
+*.log
+*.tmp
+
+# -------------------------
+# OS Files
+# -------------------------
+.DS_Store
+Thumbs.db
+
+# -------------------------
+# Reports / Outputs
+# -------------------------
+*.pdf
+model_predictions.pdf
+processed_dataset.csv
+
+# -------------------------
+# Test / Coverage
+# -------------------------
+.pytest_cache/
+.coverage
+htmlcov/
